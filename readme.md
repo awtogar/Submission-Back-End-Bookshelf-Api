@@ -86,3 +86,11 @@ Expected Response
     "status": "success",
     "message": "Buku berhasil dihapus"
 }
+
+### Using Parameter
+Url: http://localhost:9000/books/
+Endpoint: Get /books?name=Books
+Endpoint: Get /books?reading=1
+Endpoint: Get /books?finished=0
+Or more specific /books?name=Bu&reading=1&finished=0
+Methode: DELETE
