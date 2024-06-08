@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root{
+    --base: #040D12;
+    --primary: #FFFBF5;
+    --secondary: #474E68;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: '', sans-serif;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-decoration {
+    height: 38px;
+    width: auto;
+}
+
+.header-app {
+    font-size: 24px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.input-section{
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 12px;
+    border-radius: 24px;
+    
+}
+.input-section--title{
+    text-align: center;
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary);
+    padding: 16px;
+    border-radius: 16px;;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+.input-group input[type="text"],
+.input-group input[type="number"],
+.input-group input[type="checkbox"] {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--primary);
+}
+
+.bookshelf {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.bookshelf h2 {
+    margin-bottom: 10px;
+}
