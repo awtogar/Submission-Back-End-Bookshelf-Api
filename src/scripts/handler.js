@@ -4,7 +4,7 @@ const books = require('./books');
 const addBookHandler = (request, h) => {
     const {
         name, year, author, summary,
-        publisher, pageCount, readPage, reading
+        publisher, pageCount, readPage, reading,
     } = request.payload;
 
     if (!name) {
@@ -43,16 +43,44 @@ const addBookHandler = (request, h) => {
     }).code(201);
 };
 
-const getAllBooksHandler = () => ({
-    status: 'success',
-    data: {
-        books: books.map(({ id, name, publisher }) => ({ id, name, publisher })),
-    },
-});
+const getAllBooksHandler = (request, h) => {
+    const { name, reading, finished } = request.query;
+
+    let filteredBooks = books;
+
+    if (name) {
+        filteredBooks = filteredBooks.filter((book) =>
+            book.name.toLowerCase().includes(name.toLowerCase())
+        );
+    }
+
+    if (reading !== undefined) {
+        filteredBooks = filteredBooks.filter((book) =>
+            book.reading === !!Number(reading)
+        );
+    }
+
+    if (finished !== undefined) {
+        filteredBooks = filteredBooks.filter((book) =>
+            book.finished === !!Number(finished)
+        );
+    }
+
+    return h.response({
+        status: 'success',
+        data: {
+            books: filteredBooks.map(({ id, name, publisher }) => ({
+                id,
+                name,
+                publisher,
+            })),
+        },
+    }).code(200);
+};
 
 const getBookByIdHandler = (request, h) => {
     const { bookId } = request.params;
-    const book = books.find(b => b.id === bookId);
+    const book = books.find((b) => b.id === bookId);
 
     if (!book) {
         return h.response({
@@ -73,7 +101,7 @@ const editBookByIdHandler = (request, h) => {
     const { bookId } = request.params;
     const {
         name, year, author, summary,
-        publisher, pageCount, readPage, reading
+        publisher, pageCount, readPage, reading,
     } = request.payload;
 
     if (!name) {
@@ -90,7 +118,7 @@ const editBookByIdHandler = (request, h) => {
         }).code(400);
     }
 
-    const index = books.findIndex(b => b.id === bookId);
+    const index = books.findIndex((b) => b.id === bookId);
 
     if (index === -1) {
         return h.response({
@@ -115,7 +143,7 @@ const editBookByIdHandler = (request, h) => {
 
 const deleteBookByIdHandler = (request, h) => {
     const { bookId } = request.params;
-    const index = books.findIndex(b => b.id === bookId);
+    const index = books.findIndex((b) => b.id === bookId);
 
     if (index === -1) {
         return h.response({
